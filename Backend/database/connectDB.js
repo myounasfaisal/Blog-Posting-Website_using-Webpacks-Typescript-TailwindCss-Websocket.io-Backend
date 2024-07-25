@@ -6,9 +6,9 @@ export const connectDB = async (DBName) => {
       `${process.env.MONGODB_URI}/${DBName}`
     );
 
-    if (connection)
+    if (connectionInstance)
       console.log("DB Connected at : ", connectionInstance.connection.host);
   } catch (error) {
-    console.error("Error : ", error, message);
+    console.error("Error : ", error.message);
   }
 };

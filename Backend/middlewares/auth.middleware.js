@@ -3,15 +3,12 @@ import { apiErrors } from "../utils/apiErrors.utils.js";
 import { asyncWrapper } from "../utils/asyncWrapper.js";
 import { User } from "../models/user.model.js";
 
-export const validateTokens = asyncWrapper(async (req, res, next) => {
+export const validateTokens = asyncWrapper(async (req, _, next) => {
   const { accessToken } = req.body || req.header("Auhtorizaton") || req.cookie;
 
   if (!accessToken) throw new apiErrors("Cookies Not Found", 404);
 
-  const decodedToken = await jwt.verify(
-    accessToken,
-    process.env.ACCESS_TOKEN_SECRET
-  );
+  const decodedToken = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
 
   if (!decodedToken) throw new apiErrors("Cookies Expired", 402);
 

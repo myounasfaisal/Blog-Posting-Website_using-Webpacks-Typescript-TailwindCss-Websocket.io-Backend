@@ -1,7 +1,7 @@
-export const asyncWrapper = async (requestHandler) => {
+const asyncWrapper = (requestHandler) => {
   return (req, res, next) => {
-    Promise.resolve(requestHandler(req, res)).catch((error) => {
-      next(error);
-    });
+    Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
   };
 };
+
+export { asyncWrapper };

@@ -26,4 +26,13 @@ app.use(
 
 //Import Routes
 
+import userRoutes from "./routes/user.routes.js";
+import blogRoutes from "./routes/post.routes.js";
+import commentRoutes from "./routes/comment.routes.js";
+import likeRoutes from "./routes/like.routes.js";
+
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/blog", blogRoutes);
+app.use("/api/v1/comment", commentRoutes);
+app.use("/api/v1/like", likeRoutes);
 export { app };
