@@ -4,6 +4,10 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {
+    avatar: {
+      type: String,
+      required: true,
+    },
     name: {
       required: true,
       type: String,
@@ -22,9 +26,9 @@ const userSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
-    posts: [],
-    followers: [],
-    following: [],
+    refreshToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
@@ -37,8 +41,7 @@ userSchema.pre("save", async function hashPassword(next) {
 });
 
 userSchema.methods.comparePassword = async function (password) {
-  const isTrue = await bcrypt.compareSync(password, this.password);
-  return isTrue;
+  return bcrypt.compare(password, this.password);
 };
 userSchema.methods.generateAccessToken = async function () {
   return await jwt.sign({ id: this._id }, process.env.ACCESS_SECRET, {
