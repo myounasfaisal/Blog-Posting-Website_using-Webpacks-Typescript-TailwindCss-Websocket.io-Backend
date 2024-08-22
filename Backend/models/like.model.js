@@ -7,19 +7,13 @@ const likeSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    likedComment: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
-      required: function () {
-        return !this.likedPost;
-      },
-    },
     likedBlog: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Blog",
-      required: function () {
-        return !this.likedComment;
-      },
+    },
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
