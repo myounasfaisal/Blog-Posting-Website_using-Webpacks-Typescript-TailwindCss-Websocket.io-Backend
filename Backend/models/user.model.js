@@ -41,7 +41,7 @@ userSchema.pre("save", async function hashPassword(next) {
 });
 
 userSchema.methods.comparePassword = async function (password) {
-  return bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 };
 userSchema.methods.generateAccessToken = async function () {
   return await jwt.sign({ id: this._id }, process.env.ACCESS_SECRET, {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Card</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+    </head>
+    <body class="bg-gray-100 h-screen">
+        <header
+            class="bg-white h-14 flex lg:justify-between justify-evenly py-2 gap-x-4 px-2 border-b-2 md:px-4 xl:px-11 xl:h-16">
+            <div class="flex w-[720px] gap-5">
+                <div class="max-w-[200px]"><a href="./index.html"><img
+                            class="h-full w-full rounded-sm overflow-hidden"
+                            src="https://i.pinimg.com/474x/ec/6f/c4/ec6fc4c48dce36cac1945acf59153a23.jpg"
+                            alt></a></div>
+
+            </div>
+            <nav id="login-page"
+                class="flex justify-end text-sm md:text-base gap-2 h-full w-full lg:w-[22%] md:w-[43.5%]">
+                <button
+                    class="hover:text-blue-400 hover:rounded-md hover:underline px-4 hover:bg-blue-200">Log
+                    In</button>
+                <button id="register-page"
+                    class="text-blue-500 font-semibold px-3 py-0 border border-indigo-700 rounded-md hover:text-white hover:bg-blue-500 hover:underline">Register</button>
+            </nav>
+        </header>
+        <main class="flex items-center justify-center h-full">
+            <section
+                class="bg-white p-6 lg:p-10 rounded-lg shadow-lg w-full max-w-lg lg:max-w-xl">
+                <h1
+                    class="font-semibold text-lg lg:text-2xl py-3 text-center">Log
+                    In</h1>
+                <div class="mb-4">
+                    <h3 class="font-medium py-1 px-1">Username or Email</h3>
+                    <input
+                        class="w-full outline-none border border-gray-400 rounded-md h-10 lg:h-12 px-2"
+                        type="text" name="username" id="login-username-email">
+                </div>
+                <div class="mb-4">
+                    <h3 class="font-medium py-1 px-1">Password</h3>
+                    <input
+                        class="w-full outline-none border border-gray-400 rounded-md h-10 lg:h-12 px-2"
+                        type="password" name="users_password"
+                        id="login-password">
+                </div>
+                <button id="login-btn"
+                    class="bg-blue-500 hover:bg-blue-700 p-2 lg:p-3 mt-4 rounded-md text-white font-semibold w-full">Login</button>
+            </section>
+        </main>
+    </body>
+</html>

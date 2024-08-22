@@ -3,7 +3,6 @@ import { apiErrors } from "../utils/apiErrors.utils.js";
 import { apiResponse } from "../utils/apiResponse.utils.js";
 import { asyncWrapper } from "../utils/asyncWrapper.js";
 import { uploadOnCloudinary } from "../utils/fileUpload(Cloudinary).js";
-import cookieParser from "cookie-parser";
 
 //Start
 const generateAccessTokenAndRefreshToken = async (user) => {
@@ -29,6 +28,14 @@ const registerUser = asyncWrapper(async (req, res) => {
       [name, email, password, username].some((field) => field?.trim() == "")
     ) {
       throw new apiErrors("All Fields are Required", 405);
+    }
+
+    const userExists = await User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    if (userExists) {
+      throw new apiErrors("User Already Exists", 405);
     }
 
     const avatar = req.file;
@@ -60,7 +67,9 @@ const registerUser = asyncWrapper(async (req, res) => {
       .json(new apiResponse("User Created Successfully", 200, user));
   } catch (error) {
     console.error(error);
-    return res.status(500).json(new apiErrors("Failed To Register", 500));
+    return res
+      .status(500)
+      .json(new apiErrors("Failed To Register" || error.message, 500));
   }
 
   //end
@@ -69,15 +78,15 @@ const registerUser = asyncWrapper(async (req, res) => {
 //start
 const loginUser = asyncWrapper(async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { usernameOrEmail, password } = req.body;
 
-    if ([username, password].some((field) => field?.trim() == "")) {
+    if ([usernameOrEmail, password].some((field) => field?.trim() == "")) {
       throw new apiErrors("Username or Email is required", 405);
     }
 
     const user = await User.findOne({
-      $or: [{ username }, { email: username }],
-    }).select("-password -refreshToken");
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    }).select("-refreshToken");
 
     if (!user) {
       throw new apiErrors("User Not Found", 404);
@@ -100,6 +109,7 @@ const loginUser = asyncWrapper(async (req, res) => {
     // and storing them in the body
 
     const loggedInUser = {
+      _id: user._id,
       email: user.email,
       username: user.username,
       avatar: user.avatar,
@@ -141,4 +151,72 @@ const logoutUser = asyncWrapper(async (req, res) => {
   // end
 });
 
-export { registerUser, loginUser, logoutUser };
+const getUserDetails = asyncWrapper(async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (!id) {
+      throw new apiErrors("User ID is required", 400);
+    }
+
+    const user = await User.findById(id).select("-password -refreshToken");
+    if (!user) {
+      throw new apiErrors("User Not Found", 404);
+    }
+
+    res.status(200).json(new apiResponse("User Found", 200, user));
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+const updateUserProfile = asyncWrapper(async (req, res) => {
+  try {
+    // Ensure the user is authenticated
+    const { user } = req;
+    if (!user) throw new apiErrors("User not authenticated", 401);
+
+    // Create an object to store the updated user data
+    const updatedData = { ...req.body };
+
+    // Check if there's an avatar file and process it
+    if (req.file) {
+      // Assuming req.file contains the uploaded avatar file
+      const result = await uploadOnCloudinary(req.file.path); // Use req.file.path or similar
+      updatedData.avatar = result.url;
+    }
+
+    // Update the user in the database
+    const updatedUser = await User.findByIdAndUpdate(user.id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+
+    // Handle the case where user update fails
+    if (!updatedUser) throw new apiErrors("Failed to update user", 500);
+
+    // Send the response with the updated user data
+    res.status(200).json({
+      message: "User updated successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json(new apiErrors("Failed to update user", 500));
+  }
+});
+
+const updatePassword = asyncWrapper(async (req, res) => {
+  try {
+  } catch (error) {
+    console.error("Error : ", error);
+  }
+});
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUserDetails,
+  updateUserProfile,
+};
