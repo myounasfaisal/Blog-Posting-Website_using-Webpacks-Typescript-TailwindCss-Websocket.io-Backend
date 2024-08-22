@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog Editor</title>
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    </head>
+    <body class="bg-gray-100">
+        <header
+            class="bg-white h-14 flex justify-between py-2 gap-x-4 px-2 border-b-2 md:px-4 xl:px-11 xl:h-16">
+            <div class="flex w-[720px] gap-5">
+                <div class="max-w-[200px]">
+                    <a href="./index.html">
+                        <img class="h-full w-full rounded-sm overflow-hidden"
+                            src="https://i.pinimg.com/474x/ec/6f/c4/ec6fc4c48dce36cac1945acf59153a23.jpg"
+                            alt="Logo">
+                    </a>
+                </div>
+            </div>
+            <nav
+                class="flex justify-end text-sm md:text-base gap-2 h-full w-full lg:w-[22%] md:w-[43.5%]">
+                <button id="login-page"
+                    class="hover:text-blue-400 hover:rounded-md hover:underline px-4 hover:bg-blue-200">Log
+                    In</button>
+                <button id="register-page"
+                    class="text-blue-500 font-semibold px-3 py-0 border border-indigo-700 rounded-md hover:text-white hover:bg-blue-500 hover:underline">Create
+                    Account</button>
+            </nav>
+        </header>
+        <main class="flex items-center justify-center h-full">
+            <section class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+                <h1 class="font-semibold text-lg py-3 text-center">Create
+                    Blog</h1>
+                <input type="text" id="blog-title"
+                    placeholder="Enter blog title"
+                    class="w-full mb-4 p-2 border rounded-md">
+                <div id="editorjs"></div>
+                <button id="save-button"
+                    class="bg-blue-500 hover:bg-blue-700 p-2 px-4 mt-4 rounded-md text-white font-semibold w-full">Save</button>
+            </section>
+        </main>
+
+    </body>
+</html>

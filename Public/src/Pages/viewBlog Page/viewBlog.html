@@ -1,0 +1,119 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog Post</title>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest"></script>
+    </head>
+    <body>
+        <header
+            class="bg-white h-14 flex  justify-evenly py-2 gap-x-4 px-2 md:border-b-8 border-b-2 md:px-4 xl:px-11 xl:h-16">
+            <div class="flex w-[720px] gap-5">
+                <div class="max-w-[200px]"><a href="./index.html"><img
+                            class="h-full w-full rounded-sm overflow-hidden"
+                            src="https://i.pinimg.com/474x/ec/6f/c4/ec6fc4c48dce36cac1945acf59153a23.jpg"
+                            alt></a></div>
+
+            </div>
+            <nav
+                class="flex justify-end text-sm md:text-base gap-2 h-full w-full lg:w-[22%] md:w-[43.5%]">
+                <button id="login-page"
+                    class="hover:text-blue-400 hover:rounded-md hover:underline px-4 hover:bg-blue-200">Log
+                    In</button>
+                <button id="register-page"
+                    class="text-blue-500 font-semibold px-3 py-0 border border-indigo-700 rounded-md hover:text-white hover:bg-blue-500 hover:underline">Create
+                    Account</button>
+            </nav>
+        </header>
+        <main class="md:flex md:w-full justify-between ">
+            <aside
+                class=" absolute
+                 md:relative md:border-0 md:w-[10%] bg-white border-t-4 bottom-0 right-0 left-0 py-4  px-2">
+                <div id="buttons"
+                    class="flex md:flex-col md:gap-8 mt-3 justify-evenly items-center">
+                    <button id="like-btn" class="like-button text-gray-500">
+                        <i id="like-icon" class="far fa-heart "></i>
+                    </button>
+
+                    <span class=" text-xs  text-gray-700 "
+                        id="like-count">0
+                        Likes</span>
+                    <span class=" text-xs  text-gray-700 "
+                        id="comments-count">0
+                        Comments</span>
+                    <button id="comment-btn" class=" text-gray-500">
+                        <i class="far fa-comment"></i>
+                    </button>
+                </div>
+            </aside>
+            <article
+                class="md:w-[65%] w-full px-2 bg-white md:border-l-8 md:border-r-8 "
+                id="Blog">
+
+                <div id="blog-by-author"></div>
+                <section class=" border-t-2">
+
+                    <div id="comment-list"
+                        class="flex flex-col justify-center  ">
+                        <div id="add-your-comment"
+                            class="flex gap-2 mt-2 w-full">
+
+                            <picture id="user-avatar"
+                                class="h-8 w-8 rounded-full overflow-hidden">
+                                <img id="comment-avatar"
+                                    class="h-full w-full object-center"
+                                    src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                                    alt>
+                            </picture>
+
+                            <div id="add-comment" class="w-full h-40">
+                                <textarea name="comment"
+                                    id="user-comment" rows="5"
+                                    class="w-[80%] px-2 py-1  border  outline-blue-400"></textarea>
+
+                                <button id="add-comment-btn"
+                                    class="hover:text-blue-400 border rounded-md hover:underline
+                                    mt-2 px-4 hover:bg-blue-200">Submit</button>
+
+                            </div>
+
+                        </div>
+
+                    </ul>
+
+                </section>
+            </article>
+
+            <section class="flex-grow p-2">
+                <p>Posted By :-</p>
+                <div
+                    class="flex flex-col gap-3 justify-center items-center mt-2">
+                    <div class="flex gap-2 items-center w-[80%]">
+                        <div class=" rounded-full overflow-hidden h-12 w-12">
+                            <img id="author-img"
+                                class=" object-center h-full w-full "
+                                src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                                alt="Image">
+                        </div>
+                        <span id="author-name" class="h4 font-semibold">Your
+                            Name
+                        </span>
+                    </div>
+                    <button
+                        class=" w-[80%] max-w-[250px] bg-blue-500 hover:bg-blue-200 active:bg-blue-700 text-lg text-white px-4 py-1 rounded-md"
+                        id="follow-btn">
+                        Follow
+                    </button>
+                </div>
+            </section>
+        </main>
+
+    </body>
+</html>
