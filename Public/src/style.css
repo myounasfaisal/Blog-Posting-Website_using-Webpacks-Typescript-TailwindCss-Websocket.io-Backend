@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+.like-button {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.like-button .fas {
+  color: red;
+}
+/* style.css 
+ #editorjs {
+  padding: 0;
+  margin: 0;
+  background-color: #fff; /* Optional: set the background color
+}
+
+#editorjs .codex-editor__redactor {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#editorjs .ce-block__content {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#editorjs .ce-block__content:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#editorjs {
+  padding: 0;
+  margin: 0;
+}
+
+.codex-editor__redactor {
+  padding-bottom: 0 !important;
+}
+
+.ce-block__content {
+  margin-bottom: 0 !important;
+}
+
+.ce-block__content:last-child {
+  margin-bottom: 0 !important;
+}
+ */

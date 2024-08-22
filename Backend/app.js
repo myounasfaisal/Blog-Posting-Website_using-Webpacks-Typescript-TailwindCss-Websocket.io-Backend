@@ -19,7 +19,7 @@ app.use(
 
 app.use(
   cors({
-    origin: process.env.ORGINN,
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
@@ -30,9 +30,12 @@ import userRoutes from "./routes/user.routes.js";
 import blogRoutes from "./routes/post.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
 import likeRoutes from "./routes/like.routes.js";
+import followRoutes from "./routes/follow.routes.js";
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/blog", blogRoutes);
 app.use("/api/v1/comment", commentRoutes);
 app.use("/api/v1/like", likeRoutes);
+app.use("/api/v1/follow", followRoutes);
+
 export { app };
