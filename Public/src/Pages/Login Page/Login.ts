@@ -47,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             sendingLogReq();
           });
-
-          window.location.href = "./index.html"; // Redirect to home page after logout
         });
     }
   } else {
@@ -67,10 +65,4 @@ document.addEventListener("DOMContentLoaded", () => {
       sendingLogReq();
     });
   }
-});
-
-loginBtn?.addEventListener("click", async (e) => {
-  e.preventDefault();
-  await sendingLogReq();
-  window.location.href = "./index.html"; // Redirect to home page after successful login
 });

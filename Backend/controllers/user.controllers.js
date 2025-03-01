@@ -208,8 +208,53 @@ const updateUserProfile = asyncWrapper(async (req, res) => {
 
 const updatePassword = asyncWrapper(async (req, res) => {
   try {
+    const { user } = req; // Authenticated user
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      throw new apiErrors("All fields are required", 400);
+    }
+
+    if (newPassword !== confirmPassword) {
+      throw new apiErrors("Passwords do not match", 400);
+    }
+
+    const existingUser = await User.findById(user._id);
+
+    if (!existingUser) {
+      throw new apiErrors("User not found", 404);
+    }
+
+    const isPasswordValid = await existingUser.comparePassword(currentPassword);
+
+    if (!isPasswordValid) {
+      throw new apiErrors("Current password is incorrect", 400);
+    }
+
+    existingUser.password = newPassword;
+    await existingUser.save();
+
+    res.status(200).json(new apiResponse("Password updated successfully", 200));
   } catch (error) {
-    console.error("Error : ", error);
+    console.error("Error updating password:", error);
+    res.status(500).json(new apiErrors("Failed to update password", 500));
+  }
+});
+
+const deleteAccount = asyncWrapper(async (req, res) => {
+  try {
+    const { user } = req; // Authenticated user
+
+    const deletedUser = await User.findByIdAndDelete(user._id);
+
+    if (!deletedUser) {
+      throw new apiErrors("User not found", 404);
+    }
+
+    res.status(200).json(new apiResponse("Account deleted successfully", 200));
+  } catch (error) {
+    console.error("Error deleting account:", error);
+    res.status(500).json(new apiErrors("Failed to delete account", 500));
   }
 });
 
@@ -219,4 +264,6 @@ export {
   logoutUser,
   getUserDetails,
   updateUserProfile,
+  deleteAccount,
+  updatePassword,
 };

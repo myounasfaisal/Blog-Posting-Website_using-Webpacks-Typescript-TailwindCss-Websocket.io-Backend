@@ -1,5 +1,6 @@
 import { getTokenFromLocalStorage } from "../../../../utils/getTokenFromLocalStorage";
-
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 export const patchProfileData = async (formData: FormData) => {
   const token = getTokenFromLocalStorage();
 
@@ -23,12 +24,12 @@ export const patchProfileData = async (formData: FormData) => {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to update profile data");
+      toastr.error("Failed To Update the Profile");
     }
 
     const result = await response.json();
     console.log("Response:", result);
-    alert("Data Updated");
+
     const { data } = result;
     return data;
   } catch (error) {

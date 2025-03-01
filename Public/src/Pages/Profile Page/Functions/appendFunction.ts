@@ -4,6 +4,8 @@ import { getUserIdSession } from "../../../utils/getUserIdSession";
 import { idFromLocalStorage } from "../../../utils/idFromLocalStorage";
 import { followReq } from "./request/followReq";
 import { patchProfileData } from "./request/patchProfileData";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 
 interface ProfileData {
   _id: string;
@@ -16,6 +18,7 @@ interface ProfileData {
 export const appendFunction = async (data: ProfileData | null) => {
   if (!data) {
     console.error("Data is missing");
+    toastr.error("Data is missing.");
     return;
   }
 
@@ -79,24 +82,12 @@ export const appendFunction = async (data: ProfileData | null) => {
       );
 
       const following_id = data._id;
-      const followDoc = await createFollowDoc(following_id);
 
-      if (followDoc.status) {
-        followButton.textContent = "Unfollow";
-        followButton.classList.replace("bg-blue-500", "bg-gray-500");
-        followButton.classList.replace(
-          "hover:bg-blue-200",
-          "hover:bg-gray-200"
-        );
-        followButton.classList.replace(
-          "active:bg-blue-700",
-          "active:bg-gray-700"
-        );
-      }
+      if (userId) {
+        // User is logged in
+        const followDoc = await createFollowDoc(following_id);
 
-      followButton.addEventListener("click", async () => {
-        const data = await followReq(followDoc?._id);
-        if (data.status) {
+        if (followDoc.status) {
           followButton.textContent = "Unfollow";
           followButton.classList.replace("bg-blue-500", "bg-gray-500");
           followButton.classList.replace(
@@ -107,19 +98,43 @@ export const appendFunction = async (data: ProfileData | null) => {
             "active:bg-blue-700",
             "active:bg-gray-700"
           );
-        } else {
-          followButton.textContent = "Follow";
-          followButton.classList.replace("bg-gray-500", "bg-blue-500");
-          followButton.classList.replace(
-            "hover:bg-gray-200",
-            "hover:bg-blue-200"
-          );
-          followButton.classList.replace(
-            "active:bg-gray-700",
-            "active:bg-blue-700"
-          );
+          toastr.success("Following successfully!");
         }
-      });
+
+        followButton.addEventListener("click", async () => {
+          const data = await followReq(followDoc?._id);
+          if (data.status) {
+            followButton.textContent = "Unfollow";
+            followButton.classList.replace("bg-blue-500", "bg-gray-500");
+            followButton.classList.replace(
+              "hover:bg-blue-200",
+              "hover:bg-gray-200"
+            );
+            followButton.classList.replace(
+              "active:bg-blue-700",
+              "active:bg-gray-700"
+            );
+            toastr.success("Now following user!");
+          } else if (!data.status) {
+            followButton.textContent = "Follow";
+            followButton.classList.replace("bg-gray-500", "bg-blue-500");
+            followButton.classList.replace(
+              "hover:bg-gray-200",
+              "hover:bg-blue-200"
+            );
+            followButton.classList.replace(
+              "active:bg-gray-700",
+              "active:bg-blue-700"
+            );
+            toastr.success("User unfollowed");
+          }
+        });
+      } else {
+        // User is not logged in
+        followButton.addEventListener("click", () => {
+          toastr.warning("Please log in to follow.");
+        });
+      }
     }
   } else {
     if (updateBtn) {
@@ -174,12 +189,14 @@ export const appendFunction = async (data: ProfileData | null) => {
             }
 
             await patchProfileData(formData);
-            console.log("Profile updated successfully.");
+            toastr.success("Profile updated successfully.");
           } catch (error) {
             console.error("Failed to update profile data:", error);
+            toastr.error("Failed to update profile data.");
           }
         } else {
           console.log("No changes detected.");
+          toastr.info("No changes detected.");
         }
       });
     }
@@ -196,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!avatarInput || !avatarElem) {
     console.error("Required elements not found");
+    toastr.error("Required elements for avatar not found.");
     return;
   }
 
@@ -207,8 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("File selected: ", file);
       console.log("Object URL: ", objectURL);
       avatarElem.src = objectURL;
-
-      // Optionally, revoke the object URL after some time
+      toastr.info("Avatar image selected.");
       setTimeout(() => URL.revokeObjectURL(objectURL), 10000);
     } else {
       console.log("No file selected");

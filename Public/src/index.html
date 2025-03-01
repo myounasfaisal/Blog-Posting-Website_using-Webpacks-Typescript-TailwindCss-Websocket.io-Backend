@@ -5,7 +5,7 @@
         <title>Document</title>
 
     </head>
-    <body class=" bg-gray-100">
+    <body class=" bg-gray-100 ">
         <header
             class=" bg-white h-14 flex  lg:justify-between justify-evenly py-2  gap-x-4 px-2  border-b-2 md:px-4 xl:px-11 xl:h-16 ">
 
@@ -33,27 +33,29 @@
 
         </header>
 
-        <main class="flex">
-            <aside
-                class="h-[100%] w-[30%] hidden md:block flex-col items-center">
-                <div
-                    class="h-14 px-4 flex flex-col items-center justify-center">
-                    <button id="profile-page-btn"
-                        class=" h-full w-full py-2">
+        <main class=" w-full flex justify-center">
+            <div class="flex flex-col w-[75%] justify-center items-center">
+                <aside id="navbar"
+                    class="h-[100%] w-[100%]  bg-white mt-8 flex items-center justify-between">
+                    <div
+                        class="h-14 px-4 flex w-full items-center justify-between   ">
+                        <button id="profile-page-btn"
+                            class=" h-full py-2">
 
-                        &#x1F642; Profile
-                    </button>
-                    <button id="account-page-btn" class="leaf-button ">
-                        <i class="fas fa-leaf text-green-900"></i> Account
-                    </button>
-                </div>
+                            &#x1F642; Profile
+                        </button>
+                        <button id="account-page-btn" class="leaf-button ">
+                            <i class="fas fa-leaf text-green-900"></i> Account
+                        </button>
+                    </div>
 
-            </aside>
-            <article class=" w-full flex flex-col justify-center ">
-                <ul id="blog-list"
-                    class=" py-3 h-screen flex flex-col gap-y-2 h">
-                </ul>
-            </article>
+                </aside>
+                <article class=" w-full flex flex-col justify-center ">
+                    <ul id="blog-list"
+                        class=" py-3 h-screen flex flex-col gap-y-2 h">
+                    </ul>
+                </article>
+            </div>
         </main>
     </body>
 </html>

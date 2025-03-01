@@ -64,10 +64,10 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: ["style-loader", "css-loader", "postcss-loader"],
-        include: path.resolve(__dirname, "src"),
       },
+
       {
         test: /\.(jpg|jpeg|gif|png|svg)$/,
         type: "asset/resource",

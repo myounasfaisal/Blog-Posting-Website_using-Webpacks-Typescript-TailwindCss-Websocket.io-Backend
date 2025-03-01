@@ -19,8 +19,10 @@ app.use(
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
+    origin: "http://localhost:8080", // Allow requests only from your frontend
+    methods: ["GET", "POST", "PATCH", "DELETE"], // Specify allowed methods
+    credentials: true, // If your requests include credentials
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
 );
 

@@ -4,17 +4,19 @@ import {
 } from "../../../../utils/getTokenFromLocalStorage";
 import { idFromLocalStorage } from "../../../../utils/idFromLocalStorage";
 import { setBlogIdSessionStorage } from "../../../../utils/setBlogIdSessionStorage";
+import toastr from "toastr"; // Import toastr
+import "toastr/build/toastr.min.css"; // Import toastr CSS
+
 export const postBlogReq = async (
   content: object | null | undefined
 ): Promise<any> => {
   if (!content) {
+    toastr.error("Blog content is empty or not defined.", "Content Error");
     console.error("Blog Content Empty || not defined");
-    console.log(content);
+    return;
   } else {
     const author_id = idFromLocalStorage();
     const { AccessToken, RefreshToken }: Token = getTokenFromLocalStorage();
-
-    console.log("cont ", content);
 
     const data = {
       blog: {
@@ -41,15 +43,18 @@ export const postBlogReq = async (
 
       if (response.ok) {
         const Data = await response.json();
-        console.log("Data : ", Data);
         const { data } = Data;
         setBlogIdSessionStorage(data._id);
+        toastr.success("Blog posted successfully!", "Success");
       } else {
-        console.error("Failed to post blog:", response.statusText);
+        const errorMessage = response.statusText || "Unknown error occurred";
+        toastr.error(`Failed to post blog: ${errorMessage}`, "Post Error");
+        console.error("Failed to post blog:", errorMessage);
         return null;
       }
     } catch (error) {
       console.error("Error posting blog:", error);
+      toastr.error("An error occurred while posting the blog.", "Error");
       return null;
     }
   }

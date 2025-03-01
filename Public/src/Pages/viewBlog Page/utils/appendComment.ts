@@ -2,9 +2,10 @@ import { idFromLocalStorage } from "../../../utils/idFromLocalStorage";
 import { isAuthor } from "../../../utils/isAuthor";
 import { isUserLogin } from "../../../utils/isUserLogin";
 import { patchCommentReq } from "../functions/request/patchCommentReq";
+import toastr from "toastr";
+import { userIdToSession } from "../../../utils/userIdToSession";
 
 export const appendComment = (Data: any) => {
-  const isLogged = isUserLogin();
   const userId = idFromLocalStorage();
   const isCommentAuthor = isAuthor(Data.user_id._id, userId);
 
@@ -12,17 +13,22 @@ export const appendComment = (Data: any) => {
 
   div.innerHTML = `
     <hr class="w-[80%]">
-    <div id="image-name-container" class="flex gap-1">
-      <div id="image-container" class="overflow-hidden rounded-full h-8">
+    <div id="image-name-container-${Data._id}" class="cursor-pointer flex gap-1">
+      <div id="image-container-${Data._id}" class="overflow-hidden rounded-full h-8 w-8">
         <img
-          class="h-full"
+          class="h-full w-full object-cover rounded-full"
           id="image-${Data._id}"
           src="${Data.user_id.avatar}"
           alt="${Data.user_id.username}'s avatar"
         >
       </div>
       <div class="flex flex-col mb-2" id="name-date-container">
-        <span class="font-semibold text-sm text-[#404040]">${Data.user_id.username}</span>
+        <span
+          class="font-semibold text-sm text-[#404040] cursor-pointer"
+          id="username-${Data._id}"
+        >
+          ${Data.user_id.username}
+        </span>
         <span class="text-xs font-extralight text-gray-700" id="date">${new Date(Data.createdAt).toLocaleDateString()}</span>
       </div>
     </div>
@@ -55,7 +61,17 @@ export const appendComment = (Data: any) => {
       if (originalComment !== updatedComment && updatedComment) {
         const { comment } = await patchCommentReq(Data._id, updatedComment);
         originalComment = comment;
+        toastr.success("Comment edited successfully!");
       }
     });
   }
+
+  // Event Listeners for profile redirection
+
+  document
+    .getElementById(`username-${Data._id}`)
+    ?.addEventListener("click", () => {
+      userIdToSession(Data.user_id._id);
+      window.location.href = "Profile.html";
+    });
 };

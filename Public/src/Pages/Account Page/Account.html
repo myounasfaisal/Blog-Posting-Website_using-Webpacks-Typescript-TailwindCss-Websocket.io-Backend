@@ -1,0 +1,92 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body class="bg-gray-100">
+        <header
+            class="bg-white h-14 flex lg:justify-between justify-evenly py-2 gap-x-4 px-2 border-b-2 md:px-4 xl:px-11 xl:h-16">
+            <div class="flex w-[720px] gap-5">
+                <div
+                    class="maxwidth-[125px] md:max-w-[175px] lg:max-w-[200px] sm:max-w-[150px]">
+                    <a class="h-10 w-12" href="./index.html">
+                        <img class="h-full w-full rounded-sm overflow-hidden"
+                            src="https://i.pinimg.com/474x/ec/6f/c4/ec6fc4c48dce36cac1945acf59153a23.jpg"
+                            alt>
+                    </a>
+                </div>
+            </div>
+            <nav
+                class="flex justify-end text-sm md:text-base gap-2 h-full w-full lg:w-[22%] md:w-[43.5%]">
+                <button id="login-page-btn"
+                    class="hover:text-blue-400 hover:rounded-md hover:underline px-4 hover:bg-blue-200">Log
+                    In</button>
+                <button id="register-page-btn"
+                    class="text-blue-500 font-semibold px-3 py-0 border border-indigo-700 rounded-md hover:text-white hover:bg-blue-500 hover:underline">Create
+                    Account</button>
+            </nav>
+        </header>
+
+        <main class="w-full flex justify-center">
+            <div class="flex flex-col w-[75%] justify-center items-center">
+                <aside
+                    class="h-[100%] w-[100%] bg-white mt-8 flex items-center justify-between">
+                    <div
+                        class="h-14 px-4 flex w-full items-center justify-between">
+                        <button id="profile-page-btn" class="h-full py-2">
+                            &#x1F642; Profile
+                        </button>
+                        <button id="account-page-btn" class="leaf-button">
+                            <i class="fas fa-leaf text-green-900"></i> Account
+                        </button>
+                    </div>
+                </aside>
+                <section
+                    class="w-full flex flex-col items-center bg-white pb-6 mt-8">
+                    <h1 class="font-semibold text-lg py-3">Set Password</h1>
+                    <div class="w-[90%]">
+                        <h3 class="font-medium py-1 px-1">Current Password</h3>
+                        <input
+                            class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2"
+                            type="Password" id="current-password">
+                    </div>
+                    <div class="w-[90%]">
+                        <h3 class="font-medium py-1 px-1">New Password</h3>
+                        <input
+                            class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2"
+                            type="Password" id="new-password">
+                    </div>
+                    <div class="w-[90%]">
+                        <h3 class="font-medium py-1 px-1">Confirm Password</h3>
+                        <input
+                            class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2"
+                            type="Password" id="confirm-password">
+                    </div>
+                    <button id="update-password-btn"
+                        class="bg-green-500 active:bg-green-800 p-2 mt-2 rounded-md text-white font-semibold">Update
+                        Password</button>
+
+                    <div class="w-[90%] py-2 px-3">
+                        <hr class="mb-3 mt-3">
+                        <h2 class="font-bold">Delete Account:-</h2>
+                        <p>Deleting your account will:</p>
+                        <ul>
+                            <li>Delete your profile, along with your
+                                authentication associations. This does not
+                                include applications permissions. You will have
+                                to remove them yourself.</li>
+                            <li>Delete any and all content you have, such as
+                                articles, comments, or your reading list.</li>
+                            <li>Allow your username to become available to
+                                anyone.</li>
+                        </ul>
+                        <button id="delete-account-btn"
+                            class="bg-red-500 active:bg-red-800 p-2 mt-2 rounded-md text-white font-semibold">Delete
+                            Account</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </body>
+</html>

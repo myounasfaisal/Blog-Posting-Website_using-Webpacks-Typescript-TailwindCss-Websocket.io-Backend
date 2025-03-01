@@ -1,27 +1,44 @@
-import { initializeEditor } from "./functions/Editor";
 import { logoutReq } from "../../functions/request/logoutReq";
+import "../../style.css";
 import { isUserLogin } from "../../utils/isUserLogin";
 import { removeTokenAndId } from "../../utils/removeTokensAndId";
-import toastr from "toastr"; // Import toastr
-import "toastr/build/toastr.min.css"; // Import toastr CSS
-
-const loginPageBtn = document.getElementById("login-page") as HTMLElement;
-const registerPageBtn = document.getElementById("register-page") as HTMLElement;
-
+import { handleDeleteAccount } from "./functions/requests/deleteAccReq";
+import { handleUpdatePassword } from "./functions/requests/passwordChangeReq";
+import "toastr/build/toastr.min.css";
+const loginPageBtn = document.getElementById("login-page-btn") as HTMLElement;
+const registerPageBtn = document.getElementById(
+  "register-page-btn"
+) as HTMLElement;
+const profilePageBtn = document.getElementById(
+  "profile-page-btn"
+) as HTMLElement;
 document.addEventListener("DOMContentLoaded", async () => {
   const check = isUserLogin();
 
   if (check) {
+    const updatePasswordBtn = document.getElementById(
+      "update-password-btn"
+    ) as HTMLButtonElement;
+    const deleteAccountBtn = document.getElementById(
+      "dlt-btn"
+    ) as HTMLButtonElement;
+
+    if (updatePasswordBtn) {
+      updatePasswordBtn.addEventListener("click", handleUpdatePassword);
+    }
+
+    if (deleteAccountBtn) {
+      deleteAccountBtn.addEventListener("click", handleDeleteAccount);
+    }
     if (registerPageBtn) {
       registerPageBtn.textContent = "Create Post";
       registerPageBtn.id = "create-post";
 
       const createPost = document.getElementById("create-post");
-      if (createPost) {
+      if (createPost)
         createPost.addEventListener("click", () => {
           window.location.href = "./Blog.html";
         });
-      }
     }
 
     if (loginPageBtn) {
@@ -29,11 +46,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       loginPageBtn.id = "log-out";
 
       const logoutBtn = document.getElementById("log-out");
-      if (logoutBtn) {
+      if (logoutBtn)
         logoutBtn.addEventListener("click", async () => {
           await logoutReq();
           removeTokenAndId();
-          toastr.success("Logged out successfully!");
 
           // Change buttons back to "Create Account" and "Log In"
           registerPageBtn.textContent = "Create Account";
@@ -50,11 +66,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.href = "Login.html";
           });
 
-          setTimeout(() => {
-            window.location.href = "./index.html"; // Redirect to home page after logout
-          }, 800);
+          window.location.href = "./index.html"; // Redirect to home page after logout
         });
-      }
     }
   } else {
     // Ensure buttons are in their default state if the user is not logged in
@@ -72,7 +85,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.href = "Login.html";
     });
   }
-});
 
-// Initialize the editor
-initializeEditor();
+  profilePageBtn.addEventListener("click", () => {
+    window.location.href = "./Profile.html";
+  });
+});

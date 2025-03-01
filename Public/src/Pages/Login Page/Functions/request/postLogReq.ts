@@ -29,6 +29,7 @@ export const postLogReq = async (): Promise<any | null> => {
         const { data } = Data;
         setTokenToLocalStorage(data.accessToken, data.refreshToken);
         idToLocalStorage(data._id);
+        avatarToLocalStorage(data.avatar);
 
         return data;
       } else {

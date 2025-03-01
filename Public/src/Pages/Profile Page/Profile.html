@@ -18,118 +18,109 @@
                             alt></a>
                 </div>
 
-                <div id="search-bar-container"
-                    class="hidden md:block max-w-[680px] justify-start flex-1 md:px-0 ">
-                    <input type="search" id="search-bar"
-                        class="  md:p-3 md:w-full md:h-full  md:outline-none md:rounded-md md:border  md:border-gray-200 active:out  ">
-                </div>
             </div>
 
             <nav
                 class="flex justify-end text-sm md:text-base  gap-2 h-full w-full lg:w-[22%] md:w-[43.5%] ">
-                <button
-                    class="hover:text-blue-400  hover:rounded-md hover:underline px-4 hover:bg-blue-200">Log
-                    In</button>
-                <button
-                    class="text-blue-500  font-semibold px-3 py-0 border-indigo-700 border rounded-md  hover:text-white hover:bg-blue-500  hover:underline">Create
+
+                <button id="login-page"
+                    class="hover:text-blue-400  hover:rounded-md hover:underline px-4 hover:bg-blue-200">Create
                     Account</button>
+
+                <button id="register-page"
+                    class="text-blue-500  font-semibold px-3 py-0 border-indigo-700 border rounded-md  hover:text-white hover:bg-blue-500  hover:underline">Log
+                    In</button>
+
             </nav>
         </header>
-        <main
-            class=" h-screen flex flex-col  justify-center sm:flex-row mt-4 md:pr-[10%]">
-            <aside
-                class="h-[100%] w-[30%] hidden md:block flex-col items-center">
-                <div
-                    class="h-14 px-4 flex flex-col items-center justify-center">
-                    <button id="profile-page-btn"
-                        class=" h-full w-full py-2">
-
-                        &#x1F642; Profile
-                    </button>
-                    <button id="account-page-btn" class="leaf-button ">
-                        <i class="fas fa-leaf text-green-900"></i> Account
-                    </button>
-                </div>
-            </aside>
-
-            <section class="w-full">
-                <div class="bg-white pb-6 flex flex-col items-center ">
-                    <h1 class=" font-semibold text-lg py-3  ">User
-                        Details</h1>
-
-                    <div class="w-[90%]">
-
-                        <h3 class=" font-medium py-1 px-1">
-                            Profile Picture
-                        </h3>
-
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <picture
-                                    class=" rounded-full  object-center overflow-hidden  h-12 w-12 bg-black mr-3">
-                                    <img id="display-avatar"
-                                        class="h-full w-full "
-                                        src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-                                        alt="profile">
-                                </picture>
-                                <input class="border p-2 rounded-md" type="file"
-                                    name="upload-avatar"
-                                    id="get-avatar"></div>
-                        </div>
-                        <hr class="mt-4">
-                    </div>
-                    <div class="w-[90%]">
-                        <h3 class=" font-medium py-1 px-1">
-                            Fullname
-                        </h3>
-
-                        <input
-                            class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2"
-                            type="text"
-                            name="users_fullname" id="fullname">
-
-                    </div>
-                    <div class="w-[90%]">
-                        <h3 class=" font-medium py-1 px-1">
-                            Email
-                        </h3>
-
-                        <input
-                            class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2 "
-                            type="text"
-                            name="users_email" id="email">
-                    </div>
-                    <div class="w-[90%]">
-
-                        <h3 class=" font-medium py-1 px-1">
-                            Username
-                        </h3>
-
-                        <input
-                            class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2 m-auto"
-                            type="text"
-                            name="username" id="username">
-
-                        <hr class="mt-4">
-
-                    </div>
-
+        <main class=" w-full flex justify-center">
+            <div class="flex flex-col w-[75%] justify-center items-center">
+                <aside id="navbar"
+                    class="h-[100%] w-[100%]  bg-white mt-8 flex items-center justify-between">
                     <div
-                        class="w-[90%] flex justify-around  mt-2 font-semibold gap-2">
+                        class="h-14 px-4 flex w-full items-center justify-between   ">
+                        <button id="profile-page-btn"
+                            class=" h-full py-2">
 
-                        <span id="no-of-followes">Followers <br>0</span>
-                        <span id="no-of-posts">Posts Posted <br>0</span>
-                        <span id="no-of-likes">User Likes <br>0</span>
-
+                            &#x1F642; Profile
+                        </button>
+                        <button id="account-page-btn" class="leaf-button ">
+                            <i class="fas fa-leaf text-green-900"></i> Account
+                        </button>
                     </div>
 
-                    <button
-                        class=" mt-5 w-[80%] max-w-[250px] bg-green-500 hover:bg-green-200 active:bg-green-700 text-lg text-white px-4 py-1 rounded-md"
-                        id="update-btn">
-                        Update Details</button>
-                </div>
-            </section>
+                </aside>
 
+                <section class="w-full mt-8">
+                    <div class="bg-white pb-6 flex flex-col items-center ">
+                        <h1 class=" font-semibold text-lg py-3  ">User
+                            Details</h1>
+
+                        <div class="w-[90%]">
+
+                            <h3 class=" font-medium py-1 px-1">
+                                Profile Picture
+                            </h3>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <picture
+                                        class=" rounded-full  object-center overflow-hidden  h-12 w-12 bg-black mr-3">
+                                        <img id="display-avatar"
+                                            class="h-full w-full "
+                                            src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                                            alt="profile">
+                                    </picture>
+                                    <input class="border p-2 rounded-md"
+                                        type="file"
+                                        name="upload-avatar"
+                                        id="get-avatar"></div>
+                            </div>
+                            <hr class="mt-4">
+                        </div>
+                        <div class="w-[90%]">
+                            <h3 class=" font-medium py-1 px-1">
+                                Fullname
+                            </h3>
+
+                            <input
+                                class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2"
+                                type="text"
+                                name="users_fullname" id="fullname">
+
+                        </div>
+                        <div class="w-[90%]">
+                            <h3 class=" font-medium py-1 px-1">
+                                Email
+                            </h3>
+
+                            <input
+                                class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2 "
+                                type="text"
+                                name="users_email" id="email">
+                        </div>
+                        <div class="w-[90%]">
+
+                            <h3 class=" font-medium py-1 px-1">
+                                Username
+                            </h3>
+
+                            <input
+                                class="w-full outline-blue-300 border-gray-400 border rounded-md h-9 px-2 m-auto"
+                                type="text"
+                                name="username" id="username">
+
+                            <hr class="mt-4">
+
+                        </div>
+
+                        <button
+                            class=" mt-5 w-[80%] max-w-[250px] bg-green-500 hover:bg-green-200 active:bg-green-700 text-lg text-white px-4 py-1 rounded-md"
+                            id="update-btn">
+                            Update Details</button>
+                    </div>
+                </section>
+            </div>
         </main>
 
     </body>
